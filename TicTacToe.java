@@ -10,24 +10,24 @@ public class TicTacToe {
         CONTINUE;
     }
 
-    private static final int BOARDSIZE = 3;
-    private static char[][] board = new char[BOARDSIZE][BOARDSIZE];
+    private static final int BOARDSIZE = 3; // sets BOARDSIZE to 3
+    private static char[][] board = new char[BOARDSIZE][BOARDSIZE]; // creates 3x3 array
     private boolean firstPlayer = true;
     private boolean gameOver = false;
     
 
     public void play()
     {
-        int col = -1;
+        int col = -1; // initia null values for col and row
         int row = -1;
 
         while (gameOver != true)
         {
-            printBoard();
+            printBoard(); // function to print the current state of the board
             if(firstPlayer)
             {
 
-            Scanner scanner = new Scanner(System.in);
+            Scanner scanner = new Scanner(System.in); // scanner to get the input from the terminal/user
             System.out.println("Player X's turn.");
             System.out.println("Player X, enter row: ");
             row = scanner.nextInt();
@@ -35,7 +35,7 @@ public class TicTacToe {
             System.out.println("Player X, enter column: ");
             col = scanner.nextInt();
             col--; 
-            //scanner.close();
+            //scanner.close(); does not work if I add it to the program
     
             }
             else
@@ -53,53 +53,52 @@ public class TicTacToe {
 
             }
 
-            if(validMove(row, col) == true)
+            if(validMove(row, col) == true) // if move is valid, set values for player 1 or 2
             {
                 if(firstPlayer)
                 {
-                    printSymbol(row, col, 'X');
+                    printSymbol(row, col, 'X'); // sets symbol to table for first player X
                 }
                 else if(!firstPlayer)
                 {
-                    printSymbol(row, col, 'O');
+                    printSymbol(row, col, 'O'); // sets symbol in table for 2nd player O
                 }
             }
-            //fix here!!
-                else
+                else // when error is made, the turn goes back to the current player
              {
                 firstPlayer = !firstPlayer;
              }
             
 
-            if(gameStatus() == Status.WIN)
+            if(gameStatus() == Status.WIN) // compares current game status
             {
-                if(firstPlayer)
+                if(firstPlayer) // if first plauer wins, print the status with X saying X won 
                 {
-                    printBoard();
-                    printStatus('X');
-                    gameOver = !gameOver;
+                    printBoard(); // prints the board
+                    printStatus('X'); // X won
+                    gameOver = !gameOver; // sets gameover value to true
                     
                 }
                 else
                 {
-                    printBoard();
-                    printStatus('O');
-                    gameOver = !gameOver;
+                    printBoard(); 
+                    printStatus('O'); // O won
+                    gameOver = !gameOver; // setsgameOver value to ture
                 }
             }
-            if(gameStatus() == Status.DRAW)
+            if(gameStatus() == Status.DRAW) // when the game ends in a draw
             {
                 printBoard();
                 printStatus('T');
                 gameOver = !gameOver;
             }
-            firstPlayer = !firstPlayer;
+            firstPlayer = !firstPlayer; // switches players
          
         }
         
        
     }
-    public TicTacToe() //constructor
+    public TicTacToe() //constructor (initializes board with empty character spaces
     {
 
         for (int i = 0; i < BOARDSIZE; i++) {
@@ -135,7 +134,7 @@ public class TicTacToe {
         board[row][col]= val;
     }
 
-
+	// The different outcomes for winners and draw based off char value given
     public static void printStatus(char player)
     {
         if(player == 'T')
