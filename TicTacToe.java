@@ -151,16 +151,16 @@ public class TicTacToe {
         }
     }
 
-    public boolean validMove(int row, int col)
+    public boolean validMove(int row, int col) // determines if move is valid
     {
 
-        if ( row < 0 || row >= BOARDSIZE || col < 0 || col >= BOARDSIZE )
+        if ( row < 0 || row >= BOARDSIZE || col < 0 || col >= BOARDSIZE ) // move is in bounds of table
         {
             System.out.println("Invalid Move!");
             return false;
         }
 
-        if(board[row][col] == 'X' || board[row][col] == 'O')
+        if(board[row][col] == 'X' || board[row][col] == 'O') // makes sure that the spot selected is empty
         {
             System.out.println("Space already occupied, choose another!");
             return false;
@@ -168,7 +168,7 @@ public class TicTacToe {
         return true;
     }
 
-    public Status gameStatus()
+    public Status gameStatus() // determines the current game status (all  8 possible win scenarios and tie scenario)
     {
         //Win for Rows
         if( board[0][0] != ' ' && board[0][0] == board[0][1] && board[0][1] == board[0][2])
@@ -206,21 +206,21 @@ public class TicTacToe {
             return Status.WIN;
         }
 
-        // Checks for Draw condition
-        for (int i = 0; i < BOARDSIZE; i++) {
+        // Checks for Draw condition, any blank space still in the array means it is still going
+        for (int i = 0; i < BOARDSIZE; i++) { //goes through 2d array to find any blank spaces
             for (int j = 0; j < BOARDSIZE; j++) {
                 if (board[i][j] == ' ') {
                     return Status.CONTINUE;
                 }
             }
 		} 
-        return Status.DRAW;
+        return Status.DRAW; // if no blank spaces found, then board is full = draw
     }
 
     public static void main(String[] args)
     {
-        TicTacToe run = new TicTacToe();
-        run.play();
+        TicTacToe game = new TicTacToe(); // creates a new instance of TicTacToe
+        game.play(); //runs the game
     }
 
 }
